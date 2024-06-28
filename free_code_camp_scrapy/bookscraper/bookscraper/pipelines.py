@@ -10,7 +10,7 @@ from itemadapter import ItemAdapter
 
 class BookscraperPipeline:
     def process_item(self, item, spider):
-        adapter = itemAdapter(item)
+        adapter = ItemAdapter(item)
         field_names = adapter.field_names()
 
         #strip strings to remove whitespaces
@@ -38,14 +38,14 @@ class BookscraperPipeline:
         if len(availability_list) < 2:
             adapter['availability'] = 0
         else:
-            adapter['availability'] = int(availability_list[1].split(' '))
+            adapter['availability'] = int(availability_list[1].split(' ')[0])
 
         #convert number of reviews to string
         adapter['num_reviews'] = int(adapter.get('num_reviews'))
 
         #convert stars text to number
-        stars = adapater.get('stars').split(' ')[1].lower()
-        stars_dict = {'zero':0, 'one':1, 'two':2, 'three':3, 'four':4} 
+        stars = adapter.get('stars').split(' ')[1].lower()
+        stars_dict = {'zero':0, 'one':1, 'two':2, 'three':3, 'four':4, 'five':5} 
         adapter['stars'] = stars_dict[stars]
 
         return item
