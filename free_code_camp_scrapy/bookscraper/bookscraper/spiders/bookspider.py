@@ -1,4 +1,5 @@
 import scrapy
+from bookscraper.items import BookscraperItem
 
 
 class BookspiderSpider(scrapy.Spider):
