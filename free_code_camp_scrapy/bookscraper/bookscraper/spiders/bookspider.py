@@ -27,7 +27,7 @@ class BookspiderSpider(scrapy.Spider):
     def parse_book_page(self, response):
         product = response.css('div.product_main')[0]
         table_rows = response.css("table.table-striped tr")
-        book_item = BookItem()
+        book_item = BookscraperItem()
         book_item['url'] = response.url,
         book_item['title'] = product.css('h1::text').get(),
         book_item['price'] = product.css('p.price_color::text').get(),
